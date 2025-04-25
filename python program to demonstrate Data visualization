@@ -1,0 +1,52 @@
+3 Implement a python program to demonstrate Data visualization with various Types of 
+Graphs using  Numpy. 
+#various Types of Graphs using Numpy.
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+
+
+# Histogram
+heights = [ 5.1, 5.1, 5.1, 5.1, 5.2, 5.3, 5.3, 5.4, 5.5, 5.5, 5.5 ]
+plt.hist(heights)
+plt.title("Heights of Students")
+
+
+# Bar chart 
+x = np.array(["blr", "chn", "mum", "delhi"])
+y = np.array([10, 4, 2, 8])
+plt.bar(x,y)
+plt.title("Sales of different locations")
+
+
+# Scatter chart
+x = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])
+y = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])
+plt.scatter(x, y)
+plt.title("Car Age Vs Speed")
+plt.xlabel("Cars Age")
+plt.ylabel("Speed of the Car")
+
+
+# Pie chart
+sales = np.array([35, 25, 25, 15])
+labels = ["Q1","Q2","Q3","Q4"]
+myexplode = [0.1, 0, 0, 0]
+plt.pie(sales, labels = labels, explode = myexplode, autopct='%.1f%%')
+plt.title("Sales of Blr")
+plt.legend()
+
+
+# Line Chart
+import matplotlib.pyplot as plt
+days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+steps_walked = [8934, 14902, 3409, 25672, 12300, 2023, 6890]
+steps_last_week = [9788, 8710, 5308, 17630, 21309, 4002, 5223]
+plt.plot(days, steps_walked, "o-g")
+plt.plot(days, steps_last_week, "v--m")
+plt.title("Step count | This week and last week")
+plt.xlabel("Days of the week")
+plt.ylabel("Steps walked")
+plt.grid(True)
+plt.legend(["This week", "Last week"])
