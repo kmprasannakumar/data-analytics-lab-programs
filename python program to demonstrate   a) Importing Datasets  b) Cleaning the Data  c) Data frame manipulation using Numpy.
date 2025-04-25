@@ -1,0 +1,120 @@
+Implement a python program to demonstrate  
+a) Importing Datasets  b) Cleaning the Data  c) Data frame manipulation using Numpy.  
+import pandas as pd
+import numpy as np
+import sqlite3
+#Create a DB
+import pandas as pd
+import sqlite3      # load the DATABASE DRIVER
+
+con = sqlite3.connect("master.db")   #  create a connect & connect to DB
+
+cur = con.cursor()                   # Create a cursor for transacation mgmt
+
+try:
+   cur.execute('''create table if not exists Employee(num integer,
+                                                       name string(10),
+                                                       salary integer) ''')  
+   # prepare a query & execute the query
+   cur.execute("insert into Employee values(1,'pramod',10000)")
+   cur.execute("insert into Employee values(2,'bhktha',2000)")
+   cur.execute("insert into Employee values(3,'kg sanjay',200)")
+   cur.execute("insert into Employee values(4,'prajwal',300)")
+except Exception as e1:
+   print("error = ",e1)
+   con.rollback()
+else:
+   con.commit()   
+   
+# open the database connection 
+con = sqlite3.connect("master.db")
+df3 = pd.read_sql_query("select * from Employee", con)
+print(df3.head())
+con.close()
+
+df1 = pd.read_csv(r"C:\Users\HP\Downloads\data.csv")
+print(df1.head(10))
+
+df2 = pd.read_csv(r"C:\Users\HP\Downloads\data.csv")
+print(df2.head())
+
+df4 = pd.read_excel(r"C:\Users\HP\Downloads\data.xlsx")
+print(df4.head())
+
+# url
+url="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+df5 = pd.read_csv(url)
+df5
+
+names=["arun","ravi","chetan","manoj","raman","hari","amar","guru","arun"]
+study=[2,4,4,3,5,1,np.nan,np.nan,2]
+city=["blr","mys","del","mum","chn","hyd","blr","blr","blr"]
+age = [30,40,50,70,80,90,100,1500,30]
+
+#preparing the dataframe
+final = pd.DataFrame({"name":names, "study":study, "city":city,"age":age})
+final
+
+final.info()
+
+#Drop duplicates
+final.drop_duplicates(inplace=True)
+print(final)
+
+#String transformation
+final["name"] = final["name"].str.upper()
+print(final)
+
+#Standardizing data types
+final["study"] = final["study"].astype(float)
+print(final)
+# Finding the  missing values
+print(final.isnull().sum())
+
+# delete the missing values
+temp1 = final.copy()
+temp1.dropna(inplace=True)
+print(temp1)
+# impute the missing values
+temp2 = final.copy()
+median = temp2["study"].median()
+temp2["study"] = temp2["study"].fillna(median)
+print(temp2)
+
+# Check for the outlier values
+df = final.copy()
+iqr = df["age"].quantile(.75) - df["age"].quantile(.50)
+min_age = df["age"].quantile(.25) - 1.5 * iqr
+max_age = df["age"].quantile(.75) + 1.5 * iqr
+
+df["age"] = df["age"].astype(float)  # Ensure age can hold float values
+
+# Impute outliers with the median
+df.loc[df["age"] > max_age, "age"] = df["age"].median()
+df.loc[df["age"] < min_age, "age"] = df["age"].median()
+print(df)
+
+# create new data frame existing data frame - only selective columns
+newdf = df[["name","cgpa"]]
+print(newdf)
+# print a column
+print(df["name"])
+# print a row
+print(df.iloc[0])
+# aggregate functions 
+print(df["cgpa"].sum())
+print(df["cgpa"].max())
+print(df["cgpa"].min())
+# filter the data 
+print(df[df["cgpa"]>=7.5])
+# create a new column
+df["result"] = np.where(df["cgpa"]>7.5, "A", "B")
+print(df)
+# delete a column
+res1 = df.drop(["name"], axis=1)
+print(res1)
+# delete a row 
+res2 = df.drop([0], axis=0)
+print(res2)
+
+(70+80)/2
