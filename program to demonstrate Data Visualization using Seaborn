@@ -1,0 +1,40 @@
+8)Write a Python program to demonstrate Data Visualization using Seaborn 
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+# Box plot
+age = [10,20,30,40,50,60,70,80,55,25,23,54,85,90,250]
+sns.boxplot(age)
+plt.title("Human Life")
+plt.show()
+
+# violin plot
+age = [10,20,30,40,50,60,70,80,55,25,23,54,85,90,250]
+sns.violinplot(age)
+plt.title("Human Life")
+plt.show()
+
+# Heat map
+sales = np.array([10,20,30,40,50])
+adv = np.array([5,3,8,5,4])
+email = np.array([10,20,30,40,50])
+df = pd.DataFrame({"sales":sales,"advertisement":adv,"email":email})
+sns.heatmap(df.corr())
+plt.show()
+
+# Distribution plot
+sales = np.array([10,20,30,40,50])
+sns.displot(sales, kde=True)
+plt.show()
+
+# pair plot
+x1 = np.array([10,20,30,40,50,60])
+x2 = np.array([1,2,3,4,5,6])
+x3 = np.array([6,5,4,3,2,1])
+x4 = np.array([10,20,30,40,50,60])
+y  = np.array([8,26,50,80,100,50])
+df = pd.DataFrame({"x1":x1,"x2":x2,"x3":x3,"x4":x4,"y":y})
+sns.pairplot(df)
+plt.show()
