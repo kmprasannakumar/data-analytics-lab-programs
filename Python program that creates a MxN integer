@@ -1,0 +1,35 @@
+4)Write a Python program that creates a MxN integer array and 
+#Prints its attributes using Matplotlib.
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Function to create mxn array and plot its attributes
+def create_and_plot_array(m, n):
+    # Create a mxn array with random integers between 0 and 100
+    array = np.random.randint(0, 100, size=(m, n))
+
+    # Print the array and its attributes
+    print(f"Array ({m}x{n}):")
+    print(array)
+    print("\nAttributes of the array:")
+    print(f"Shape: {array.shape}")
+    print(f"Dimensions: {array.ndim}")
+    print(f"Size: {array.size}")
+    print(f"Data type: {array.dtype}")
+    print(f"Max value: {array.max()}")
+    print(f"Min value: {array.min()}")
+    print(f"Mean value: {array.mean()}")
+
+    # Visualize the array with Matplotlib
+    plt.imshow(array, cmap='viridis', interpolation='nearest')
+    plt.colorbar(label='Value')
+    plt.title(f'{m}x{n} Array Visualization')
+    plt.show()
+
+# Define the dimensions m and n
+m = 5
+n = 6
+
+# Call the function to create and plot the array
+create_and_plot_array(m, n)
