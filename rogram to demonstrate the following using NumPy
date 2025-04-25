@@ -1,0 +1,92 @@
+2)Implement a python program to demonstrate the following using NumPy  
+a) Array manipulation, Searching, Sorting and splitting.  
+b) broadcasting and Plotting NumPy arrays. 
+2)import numpy as np
+import matplotlib.pyplot as plt
+#a) Array manipulation, Searching, Sorting and splitting.
+
+arr = np.array([10,20,30,40,50,60,70,80,90])
+matrix = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]],dtype=float)
+
+print(arr)
+print(matrix)
+
+#transpose of a matrix
+print(matrix.transpose())
+
+#flatten the matrix 
+print(matrix.ravel())     # matrix.reshape(-1) 
+
+#add a new ROW to a matrix
+res = np.append(matrix,[[11,12,13]],axis=0)
+print(res)
+
+#delete a ROW from a matrix
+res = np.delete(matrix,[0],axis=0)
+print(res)
+
+#combining/merge arrays
+array1 = np.array([1,2,3])
+array2 = np.array([10,20,30])
+res = np.concatenate((array1,array2))
+print(res)
+
+#Vertical stacking row wise
+print(np.vstack((array1,array2)))
+
+#Horizontal Stacking column wise
+print(np.hstack((array1, array2)))  # np.concatenate((array1, array2))
+print(np.hstack((array1.reshape(-1, 1), array2.reshape(-1, 1))))
+ 
+#column stacking - column wise
+print(np.column_stack((array1,array2)))  # same as hstack
+
+#vertical split the array
+print(np.vsplit(matrix,3))
+
+#horizontal split the array
+print(np.hsplit(arr,3))
+
+# searching within numpy array
+arr = np.array([10,20,30,40,50,60,70,80,90])
+search = int(input("Enter a element to search : "))
+
+indices = np.where(arr==search)
+if indices[0].size>0:
+   print("Found",indices[0].size,"times")
+else:
+   print("Not found")
+
+# sorting the numpy array
+arr = np.array([20,30,10,60,70,60,50])
+arr.sort()
+print(arr)
+
+#b) broadcasting and Plotting NumPy arrays.
+
+arr = np.array([1, 2, 3])
+result = arr + 5  # Broadcasting scalar 5 to each element of the array
+
+arr1 = np.array([[1, 2], [3, 4]])
+arr2 = np.array([1, 2])  # Shape (2,)
+result = arr1 + arr2  # Broadcasting arr2 to shape (2, 2) and adding
+
+arr1 = np.array([1, 2, 3])  # Shape (3,)
+arr2 = np.array([[1], [2], [3]])  # Shape (3, 1)
+result = arr1 + arr2  # Broadcasting will add arr2 to arr1
+
+#plotting numpy array 
+x = np.array([10,20,30,40,50,60])
+y = np.array([1,2,3,4,5,6])
+plt.plot(x,y)
+plt.show()
+
+#scatter plot using numpy
+x = np.random.rand(50)
+y = np.random.rand(50)
+plt.scatter(x, y)
+plt.title('Random Scatter Plot')
+plt.show()
+
+
+
